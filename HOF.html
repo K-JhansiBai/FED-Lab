@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Higher Order Function</title>
+</head>
+<body>
+    <script>
+        const products=[
+            {name:"product1",price:20,category:"Electronics"},
+            {name:"product2",price:30,category:"Clothes"},
+            {name:"product3",price:40,category:"Electronics"},
+            {name:"product4",price:50,category:"Clothes"},
+            {name:"product5",price:60,category:"CLothes"},
+            {name:"product6",price:70,category:"Electronics"},
+            {name:"product7",price:80,category:"Clothes"},
+            {name:"product8",price:90,category:"Electronics"},
+        ];
+        const productByCategory=products.reduce((acc,product)=>{
+            const category=product.category;
+            if(!acc[category]){
+                acc[category]=[];
+            }
+            acc[category].push(product);
+            return acc;
+        },{})
+        const avgPriceByCategory=Object.keys(productByCategory).map(category=>{
+            const sum=productByCategory[category].reduce((acc,product)=>acc+product.price,0);
+            return{category:category,average:sum/productByCategory[category].length};
+        });
+        const highPricedCategories=avgPriceByCategory.filter(category=>category.average>50);
+
+        console.log(highPricedCategories);
+
+    </script>
+</body>
+</html>
